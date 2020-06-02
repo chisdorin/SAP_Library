@@ -1,0 +1,94 @@
+<mvc:View
+    controllerName="org.ubb.books.controller.BookList"
+    xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+
+   <Table id="idBooksTable"
+		items="{
+			path: '/Books',
+			sorter: {
+				path: 'Title'
+				
+			}
+		}"
+		growing="true"
+		growingThreshold="10"
+		mode="SingleSelectLeft">
+		
+		<headerToolbar>
+		
+		<Toolbar>
+		<SearchField
+						id="searchField"
+						width="20%"
+						placeholder="search"
+						search="onFilter"/>
+					<Button
+						id="sortDescendingButton"
+						press="onSortDescending"
+						tooltip="sortButtonTextDescending"
+						icon="sap-icon://arrow-bottom"/>
+					<Button
+						id="sortAscendingButton"
+						press="onSortAscending"
+						tooltip="sortButtonTextDescending"
+						icon="sap-icon://arrow-top"/>
+			<content>
+				<Button
+		 			text="Add Book"
+            		press="openAddDialog"/>
+				<Button
+		 			text="Delete Book"
+            		press="onDeleteBook"/>
+				<Button
+		 			text="Update Book"
+            		press="openUpdateDialog"/>
+				<Button
+		 			text="Show checkout Books"
+            		press="onShowCheckout"/>
+			</content> 
+		</Toolbar>
+		</headerToolbar>
+	
+		<columns>
+			<Column>
+				<Text text="Title" />
+			</Column>
+			<Column>
+				<Text text="Author" />
+			</Column> 
+			<Column>
+				<Text text="Published on" />
+			</Column>
+			<Column>
+				<Text text="Language" />
+			</Column>
+         	<Column>
+				<Text text="Available books" />
+			</Column>
+			<Column>
+				<Text text="Number of books" />
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<ObjectIdentifier
+						title="{Title}"
+						text="{ISBN}"/>
+					<Text text="{Author}" />
+					<Text text="{ 
+							path: 'DatePublished',
+							type: 'sap.ui.model.type.Date'
+               			}" 
+					/>
+					<Text text="{Language}" />
+					<Text text="{= parseInt(${AvailableNr}) }" />
+					<Text text="{= parseInt(${NrOfBooks}) }" />
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+   
+</mvc:View>
